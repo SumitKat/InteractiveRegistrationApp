@@ -1,3 +1,4 @@
 .htaccess
 config.php
 email_config.php
+error_log.txt

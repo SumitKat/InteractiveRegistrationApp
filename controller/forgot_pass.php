@@ -1,10 +1,9 @@
 <?php
 session_start();
-require_once("../PHPMailer/src/PHPMailer.php");
-require_once("../PHPMailer/src/Exception.php");
-require_once("../PHPMailer/src/SMTP.php");
+require_once('../config/email_config.php');
 require_once("../api/dbquery.php");
 require_once("../config/config.php");
+require_once('create_email.php');
 ini_set('display_errors', 1);
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -14,15 +13,7 @@ $token = substr($token, 0, 15);
 
 $email = $_POST['forgotEmail'];
 $_SESSION['email'] = $email;
-$mail = new PHPMailer(true);
-$mail->IsSMTP(); // enable SMTP
-$mail->SMTPAuth = true; // authentication enabled
-$mail->SMTPSecure = 'ssl';
-$mail->Host = "smtp.gmail.com";
-$mail->Port = 465; // or 587
-$mail->Username = "kathayat.sumit123@gmail.com";
-$mail->Password = "Hello@123";
-$mail->setFrom("kathayat.sumit123@gmail.com", "MindFire Solutions", 0);
+
 $mail->addAddress($email);
 $mail->Subject = "Password Reset";
 $mail->isHTML(true);
@@ -34,5 +25,9 @@ Forgot Your Password?? Let's get you a new one:<br></br>
 if ($mail->send()) {
     echo "Password reset mail sent. Please check your email";
 } else {
-    echo "Something went wrong Please try again";
+    echo "We are facing some problem. Our engineers are working on it!!";
+    $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");
+    $txt = "error in sending password verification email\n";
+    fwrite($myfile, $txt);
+    fclose($myfile);
 }

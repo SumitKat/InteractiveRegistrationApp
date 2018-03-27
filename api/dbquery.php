@@ -1,20 +1,23 @@
 <?php
+require_once('../config/ini_config.php');
 class DbQuery
 {
     public $conn;
     public $sql;
     public function __construct()
     {
-        $conn = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DATABASE_NAME);
+        $this->conn = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DATABASE_NAME);
         // Check connection
-        if ($conn->connect_error) {
-            die( "Connection failed: " . $conn->connect_error );
+        if ($this->conn->connect_error) {
+            $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");
+            $txt = "error in establishing connection\n";
+            fwrite($myfile, $txt);
+            fclose($myfile);
         }
     }
 
     public function insert($table, $inputs = array())
     {
-        global $sql , $conn;
         $field=$values="";
         $counter = count($inputs);
         foreach ($inputs as $key => $value) {
@@ -30,36 +33,33 @@ class DbQuery
 
         }
 
-        $sql = "INSERT INTO"." $table"." (".$field.") "." VALUES "." (".$values.")";
+        $this->sql = "INSERT INTO"." $table"." (".$field.") "." VALUES "." (".$values.")";
     }
 
     public function exec()
     {
-        global $sql, $conn;
-        if ($conn->query($sql) === true) {
-            return $conn->insert_id;
+        if ($this->conn->query($this->sql) === true) {
+            return $this->conn->insert_id;
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $this->sql . "<br>" . $this->conn->error;
         }
        
     }
 
     public function select($table, $array, $id1, $id2)
     {
-        global $sql, $conn;
         $value = "";
         for ($i = 0; $i < count($array)-1; $i++) {
             $value .= $array[$i].", ";
         }
         $value .= $array[count($array) -1];
-        $sql = "SELECT $value FROM $table where $id1 = '$id2' LIMIT 1";
-        $result = $conn->query($sql);
+        $this->sql = "SELECT $value FROM $table where $id1 = '$id2' LIMIT 1";
+        $result = $this->conn->query($this->sql);
         return $result->fetch_assoc();
     }
 
     public function update($table, $inputs, $id1, $id2)
     {
-        global $sql , $conn;
         $field = "";
         $counter = count($inputs);
 
@@ -70,10 +70,9 @@ class DbQuery
 
             } else {
                 $field .= $key."='".$value."',";
-                $i++;
             }
         }
-        $sql = "UPDATE"." $table"." SET"." $field"." WHERE". " $id1"." ="."'$id2'";
-        $conn->query($sql);
+        $this->sql = "UPDATE"." $table"." SET"." $field"." WHERE". " $id1"." ="."'$id2'";
+        $this->conn->query($this->sql);
     }
 }
