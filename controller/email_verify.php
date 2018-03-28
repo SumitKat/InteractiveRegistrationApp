@@ -1,7 +1,10 @@
 <?php
 session_start();
+
+//including various files
 require_once('../config/config.php');
 require_once('../api/dbquery.php');
+
 if ((!isset($_GET['email']))||(!isset($_GET['token']))) {
     header("Location: ../index.php");
     exit();
@@ -21,6 +24,7 @@ if ((!isset($_GET['email']))||(!isset($_GET['token']))) {
     $dbValid = $row['valid'];
     $id = $row['id'];
 
+    //in case if the user has not verified their email id
     if ($dbToken != $token || $dbValid != 'F') {
         echo "User not verified!! Please register again";
     } else {

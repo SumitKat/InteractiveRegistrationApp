@@ -16,12 +16,15 @@ class DbQuery
         }
     }
 
+    //function to insert a record to the database
     public function insert($table, $inputs = array())
     {
         $field=$values="";
         $counter = count($inputs);
+
         foreach ($inputs as $key => $value) {
             $counter--;
+
             if (!$counter) {
                 $field .= $key;
                 $values .= "'".$value."'";
@@ -46,18 +49,43 @@ class DbQuery
        
     }
 
+    //function to select a record from the database
     public function select($table, $array, $id1, $id2)
     {
         $value = "";
+
         for ($i = 0; $i < count($array)-1; $i++) {
             $value .= $array[$i].", ";
         }
+
         $value .= $array[count($array) -1];
-        $this->sql = "SELECT $value FROM $table where $id1 = '$id2' LIMIT 1";
-        $result = $this->conn->query($this->sql);
-        return $result->fetch_assoc();
+        if ($id1 != '') {
+            $this->sql = "SELECT $value FROM $table where $id1 = '$id2'";
+            $result = $this->conn->query($this->sql);
+            return $result->fetch_assoc();
+            
+            
+        } else {
+            $this->sql = "SELECT $value FROM $table where '$id1' = '$id2'";
+            $result = $this->conn->query($this->sql);
+              $ret[][] = $result->fetch_assoc();
+              var_dump($ret[1][0]);
+            // return $result->fetch_assoc();
+        }
     }
 
+    public function join($id)
+    {
+        $this->sql = "SELECT interest FROM user JOIN user_interest ON user_id = id JOIN interest ON interest.id = interest_id  WHERE user.id = $id";
+        $result = $this->conn->query($this->sql);
+        $value = array();
+        while ($row = $result->fetch_assoc()) {
+            $value[] = $row["interest"];
+        }
+        return $value;
+    }
+
+    //function to update a record into database
     public function update($table, $inputs, $id1, $id2)
     {
         $field = "";
@@ -65,6 +93,7 @@ class DbQuery
 
         foreach ($inputs as $key => $value) {
             $counter--;
+
             if (!$counter) {
                 $field .= $key."='".$value."'";
 

@@ -2,6 +2,7 @@
 $mail->addAddress($email);
 $mail->Subject = 'Please verify your email address';
 $mail->isHTML(true);
+// template for the email
 $mail->Body = "
 <!doctype html>
 <html>
@@ -318,9 +319,13 @@ $mail->Body = "
 </html>
 ";
 
+//logging if mail is not sent
 if (!$mail->send()) {
-    echo 'Message was not sent.';
-    echo 'Mailer error: ' . $mail->ErrorInfo;
+    echo "We are facing some problem. Our engineers are working on it, We will be back soon!!";
+    $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");
+    $txt = "error in sending mail after registartion". $mail->ErrorInfo;
+    fwrite($myfile, $txt);
+    fclose($myfile);
 } else {
-    echo 'Message has been sent.';
+    echo 'Message has been sent. Please check your mail';
 }

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['email'] = $_GET['email'];
+$_SESSION['token'] = $_GET['token'];
 ?>
 <!DOCTYPE html>
 <html>

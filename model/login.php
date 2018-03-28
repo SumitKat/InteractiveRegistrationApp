@@ -1,11 +1,15 @@
 <?php
 ini_set('display_erros', 1);
 session_start();
-$emailErr = $passErr = "";
+
 $email = $pass = "";
+require_once('../config/config.php');
+
+// check if a user is already logged in
 if (!empty($_SESSION['login'])) {
     header("Location: dashboard.php");
 } else {
+    $emailErr = $passErr = "";
     $flag = false;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["loginEmail"])) {
@@ -31,7 +35,7 @@ if (!empty($_SESSION['login'])) {
         }
     }
 
-    require_once('../config/config.php');
+
     // Create connection
     $conn = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DATABASE_NAME);
 
@@ -50,13 +54,16 @@ if (!empty($_SESSION['login'])) {
         }
     } else if ($row['valid'] == 'F') {
         $passErr = "Please verify your email first!!";
+        if ($email=="") {
+            $passErr = "";
+        }
     } else {
-        
             $_SESSION['login']['id'] = $row['id'];
             header("Location: ../model/dashboard.php");
     }
 }
 
+//function to prevent from css
 function testInput($data)
 {
     $data = trim($data);

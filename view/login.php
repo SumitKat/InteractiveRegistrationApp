@@ -51,16 +51,18 @@ if (!empty($_SESSION['login'])) {
                                 <br>
                                 <label> SIGN IN TO MINDFIRE</label><br>
                                 <p></p>
-                                <span class="error"><?php echo isset($emailErr) ? $emailErr : '';?></span>
+                                
                                 <input class = "form-control" placeholder="Email" type = "email" name="loginEmail" id = "loginEmail" autofocus>
                                 <p></p>
-                               <span class="error"><?php echo isset($passErr) ? $passErr : '';?></span>
+                               
                                 <input type = "password" placeholder = "Password" class = "form-control" name = "loginPassword" id = "loginPassword">
                                  <p></p>
                                 <input type = "submit" name = "login" class="btn btn-primary btn-block" value = "SIGN IN">
                                 <p></p>
                                 <a href ="../view/forgot_pass.php">Forgotten my password</a>
                                 <br>
+                                <span class="error"><?php echo isset($emailErr) ? $emailErr : '';?></span>
+                                <span class="error"><?php echo isset($passErr) ? $passErr : '';?></span>
                                 </div>
                         </div>
                     </div>

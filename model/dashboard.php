@@ -41,13 +41,9 @@ $gender = $row['gender'];
 
 
 //data from interest table is fetched
-$interest = new DbQuery();
-
-$int = [];
-$int[0] = 'interest';
-
-$rowInterest = $interest->select('interest', $int, 'user_id', $id);
-$interest = $rowInterest['interest'];
+$intrst = new DbQuery();
+$rowInterest = $intrst->join($id);
+$interest = implode(", ", $rowInterest);
 
 //data about permanent address from address table is fetched
 $address = new DbQuery();
@@ -63,4 +59,24 @@ $city = $rowAddress['city'];
 $street = $rowAddress['street'];
 $state = $rowAddress['state'];
 $country = $rowAddress['country'];
+
+//extracting user info to fill in the table
+$tables =new DbQuery();
+$table = [];
+$table[0] = 'name';
+$table[1] = 'email';
+$table[2] = 'phone';
+$table[3] = 'dob';
+$table[4] = 'gender';
+
+$tableRow[][] = $tables->select('user', $table, '', '');
+
+var_dump($tableRow);
+// $name = $tableRow['name'];
+// $email = $tableRow['email'];
+// $phone = $tableRow['phone'];
+// $dob = $tableRow['dob'];
+// $gender = $tableRow['gender'];
+
+
 require_once('../view/dashboard.php');
