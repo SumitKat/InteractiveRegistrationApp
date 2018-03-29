@@ -5,8 +5,8 @@ $last_id=0;
 //including all the required files
 require_once('../config/ini_config.php');
 require_once('../config/config.php');
+require_once('../config/email_config.php');
 require_once('../api/dbquery.php');
-require_once('../controller/create_email.php');
 
 //Generating a random token
 $token = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@';
@@ -68,8 +68,9 @@ while ($i < $interestLength) {
 }
 
 $email = $_POST['loginEmail'];
-require_once('email_send.php');
+require_once('email_body.php');
 
+//Prevention from XSS
 function testInput($data)
 {
     $data = trim($data);

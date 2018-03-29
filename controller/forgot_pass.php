@@ -3,7 +3,6 @@ session_start();
 require_once('../config/email_config.php');
 require_once("../api/dbquery.php");
 require_once("../config/config.php");
-require_once('create_email.php');
 ini_set('display_errors', 1);
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -24,7 +23,7 @@ $mail->isHTML(true);
 $mail->Body = "
 Forgot Your Password?? Let's get you a new one:<br></br>
 
-<a href = 'http://172.16.8.221/interactive/view/pass_change.php?email=$email&token=$token'>Click Here</a>
+<a href = 'http://$server_addr/interactive/view/pass_change.php?email=$email&token=$token'>Click Here</a>
 ";
 
 $sql = new DbQuery();

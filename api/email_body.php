@@ -274,7 +274,7 @@ $mail->Body = "
                                 <table border='0' cellpadding='0' cellspacing='0'>
                                   <tbody>
                                     <tr>
-                                      <td><a href='http://172.16.8.221/interactive/controller/email_verify.php?email=$email&token=$token' target='_blank'>Activate Account</a> </td>
+                                      <td><a href='http://$server_addr/interactive/controller/email_verify.php?email=$email&token=$token' target='_blank'>Activate Account</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -302,7 +302,7 @@ $mail->Body = "
                 </tr>
                 <tr>
                   <td class='content-block powered-by'>
-                    Powered by <a href='http://172.16.8.221/interactive/'>Mindfire Solutions</a>.
+                    Powered by <a href='http://$server_addr/'>Mindfire Solutions</a>.
                   </td>
                 </tr>
               </table>

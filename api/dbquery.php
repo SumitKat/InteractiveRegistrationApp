@@ -63,8 +63,6 @@ class DbQuery
             $this->sql = "SELECT $value FROM $table where $id1 = '$id2'";
             $result = $this->conn->query($this->sql);
             return $result->fetch_assoc();
-            
-            
         } else {
             $this->sql = "SELECT $value FROM $table where '$id1' = '$id2'";
             $result = $this->conn->query($this->sql);
