@@ -63,30 +63,40 @@ if (empty($_SESSION['login'])) {
     <h3 class="margin">Where To Find Me?</h3><br>
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="margin">Address:</h5>
+            <h4 class="margin">Address:</h4>
             <p><?php echo $street.",".$city.",".$state.",".$country?></p>
-            <img src="../img/loginbcg.jpg" class="img-responsive margin" style="display: width: 100%" alt="Image">
         </div>
     </div>
 </div>
-<table id="myTable" class="display">
-    <thead>
-        <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-    </tbody>
-</table>
+<div class='container-fluid bg-4 text-center'>
+    <h3 class="margin">Our Other Users!!</h3><br>
+<?php 
+echo "<tbody class ='table'>";
+for ($i = 0; $i < (sizeof($tableRow, 1)/5) - 1; $i++) {
+    if ($email != $tableRow[0][$i][1]) {
+            echo "<tr>";
+            echo "<td>";
+            echo ($tableRow[0][$i][0]);
+            echo "</td>";
+            echo"<td>";
+            echo $tableRow[0][$i][1];
+            echo "</td>";
+            echo "<td>";
+            echo $tableRow[0][$i][2];
+            echo "</td>";
+            echo "<td>";
+            echo $tableRow[0][$i][3];
+            echo "</td>";
+            echo "<td>";
+            echo $tableRow[0][$i][4];
+            echo "</td>";
+            echo "</tr>";
+    }
+}
+echo "</tbody>
+</table>";
+?>
+</div>
 <footer class = "text-nowrap"> Copyright &copy; MindfireSolutions.com</footer>
 
 </body>

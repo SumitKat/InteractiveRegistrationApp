@@ -18,6 +18,9 @@ p {
     background-color: #2f2f2f; /* Black Gray */
     color: #fff;
 }
+.dataTables_wrapper {
+    margin-top: 10px;
+}
 footer {
     color: white;
     background-color: black;

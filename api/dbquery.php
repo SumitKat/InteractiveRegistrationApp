@@ -21,7 +21,6 @@ class DbQuery
     {
         $field=$values="";
         $counter = count($inputs);
-
         foreach ($inputs as $key => $value) {
             $counter--;
 
@@ -35,7 +34,7 @@ class DbQuery
             }
 
         }
-
+        var_dump($field);
         $this->sql = "INSERT INTO"." $table"." (".$field.") "." VALUES "." (".$values.")";
     }
 
@@ -66,9 +65,18 @@ class DbQuery
         } else {
             $this->sql = "SELECT $value FROM $table where '$id1' = '$id2'";
             $result = $this->conn->query($this->sql);
-              $ret[][] = $result->fetch_assoc();
-              var_dump($ret[1][0]);
-            // return $result->fetch_assoc();
+            $ret = array();
+            $i = 0;
+
+            while ($row = $result->fetch_assoc()) {
+                $ret[$i][0] = $row['name'];
+                $ret[$i][1] = $row['email'];
+                $ret[$i][2] = $row['phone'];
+                $ret[$i][3] = $row['dob'];
+                $ret[$i][4] = $row['gender'];
+                $i++;
+            }
+            return $ret;
         }
     }
 

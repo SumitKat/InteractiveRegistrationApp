@@ -69,14 +69,15 @@ $table[2] = 'phone';
 $table[3] = 'dob';
 $table[4] = 'gender';
 
-$tableRow[][] = $tables->select('user', $table, '', '');
-
-var_dump($tableRow);
-// $name = $tableRow['name'];
-// $email = $tableRow['email'];
-// $phone = $tableRow['phone'];
-// $dob = $tableRow['dob'];
-// $gender = $tableRow['gender'];
-
-
+$tableRow = array($tables->select('user', $table, '', ''));
+echo "<table id='myTable' class='display'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>DOB</th>
+            <th>Gender</th>
+        </tr>
+    </thead>";
 require_once('../view/dashboard.php');
