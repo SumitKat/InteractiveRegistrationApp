@@ -39,6 +39,7 @@ $phone = $row['phone'];
 $dob = $row['dob'];
 $gender = $row['gender'];
 
+$_SESSION['email'] = $email;
 
 //data from interest table is fetched
 $intrst = new DbQuery();
@@ -61,23 +62,6 @@ $state = $rowAddress['state'];
 $country = $rowAddress['country'];
 
 //extracting user info to fill in the table
-$tables =new DbQuery();
-$table = [];
-$table[0] = 'name';
-$table[1] = 'email';
-$table[2] = 'phone';
-$table[3] = 'dob';
-$table[4] = 'gender';
 
-$tableRow = array($tables->select('user', $table, '', ''));
-echo "<table id='myTable' class='display'>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>DOB</th>
-            <th>Gender</th>
-        </tr>
-    </thead>";
+
 require_once('../view/dashboard.php');

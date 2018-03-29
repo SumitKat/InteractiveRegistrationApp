@@ -17,8 +17,6 @@ if (empty($_SESSION['login'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">    
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script src="../js/dashboard.js"></script>
 </head>
 <body>
@@ -39,6 +37,8 @@ if (empty($_SESSION['login'])) {
                     <li><a href = "#">Contact Us</a></li>
                     <li><a href = "#">Our Products</a></li>
                     <li><a href = "#">About Us</a></li>
+                    <li><a href="../model/other_user.php">Other Users</a></li>
+                    <li><a href="../view/update_profile.php">Update Profile</a></li>
                 </ul>
                 <ul class = "nav navbar-nav navbar-right">
                     <li><a href="../model/logout.php"><span class="glyphicon glyphicon-off"></span> Log Out</a></li>
@@ -46,12 +46,17 @@ if (empty($_SESSION['login'])) {
             </div>
         </div>
     </nav>
+
+
+
 <!-- Main Container  -->
 <div class="container-fluid bg-1 text-center">
-    <h3 class="margin"><?php echo $name?></h3>
+    <h3 class="margin">Hi, <?php echo $name?></h3>
     <img src="../img/loginbcg.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
     <h3> <?php echo $phone." / ".$email ?></h3>
 </div>
+
+
 
 <div class="container-fluid bg-2 text-center">
     <h3 class="margin">What Am I?</h3>
@@ -68,36 +73,11 @@ if (empty($_SESSION['login'])) {
         </div>
     </div>
 </div>
-<div class='container-fluid bg-4 text-center'>
-    <h3 class="margin">Our Other Users!!</h3><br>
-<?php 
-echo "<tbody class ='table'>";
-for ($i = 0; $i < (sizeof($tableRow, 1)/5) - 1; $i++) {
-    if ($email != $tableRow[0][$i][1]) {
-            echo "<tr>";
-            echo "<td>";
-            echo ($tableRow[0][$i][0]);
-            echo "</td>";
-            echo"<td>";
-            echo $tableRow[0][$i][1];
-            echo "</td>";
-            echo "<td>";
-            echo $tableRow[0][$i][2];
-            echo "</td>";
-            echo "<td>";
-            echo $tableRow[0][$i][3];
-            echo "</td>";
-            echo "<td>";
-            echo $tableRow[0][$i][4];
-            echo "</td>";
-            echo "</tr>";
-    }
-}
-echo "</tbody>
-</table>";
-?>
-</div>
 <footer class = "text-nowrap"> Copyright &copy; MindfireSolutions.com</footer>
+
+
+
+
 
 </body>
 </html>

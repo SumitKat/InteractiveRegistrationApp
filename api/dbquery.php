@@ -1,5 +1,6 @@
 <?php
 require_once('../config/ini_config.php');
+require_once('../config/config.php');
 class DbQuery
 {
     public $conn;
