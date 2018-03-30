@@ -12,7 +12,6 @@ $details =[];
 $details[0] = 'token';
 $details[1] = 'valid';
 $row = $sql->select('user', $details, 'email', $_SESSION['email']);
-var_dump($_SESSION['token']);
 //check if the both the password matched
 if ($pass === $repass && $_SESSION['token'] == $row['token'] && $row['valid'] == 'F') {
     $sql = new DbQuery();
@@ -25,7 +24,9 @@ if ($pass === $repass && $_SESSION['token'] == $row['token'] && $row['valid'] ==
     //unset session variable for email
     unset($_SESSION['email']);
     unset($_SESSION['token']);
-    header("Location: ../model/dashboard.php");
+    $_SESSION['sMessage'] = "Your Password has been successfully reset!!";
+
+    header("Location: ../view/success.php");
 } else {
     echo "Something went wrong, Please try again!!";
     $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");

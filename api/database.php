@@ -7,7 +7,9 @@ require_once('../config/ini_config.php');
 require_once('../config/config.php');
 require_once('../config/email_config.php');
 require_once('../api/dbquery.php');
-
+if ($_SESSION['csrf'] != $_POST['csrf']) {
+    header("Location: ../index.php");
+}
 //Generating a random token
 $token = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@';
 $token = str_shuffle($token);
@@ -67,6 +69,7 @@ while ($i < $interestLength) {
     $i++;
 }
 
+session_unset($_SESSION['csrf']);
 $email = $_POST['loginEmail'];
 require_once('email_body.php');
 

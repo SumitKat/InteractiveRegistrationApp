@@ -34,6 +34,9 @@ footer {
     align-content: center;
 }
 
+.sucess {
+    color: #00ff00;
+}
 .error {
     color: #ff0000;
 }

@@ -34,7 +34,8 @@ $sql->update('user', $update, 'email', $email);
 
 //in case mail is not sent
 if ($mail->send()) {
-    echo "Password reset mail sent. Please check your email";
+    $_SESSION['sMessage'] = "Password reset mail has been sent. Please check your email.";
+    header("Location: ../view/success.php");
 } else {
     echo "We are facing some problem. Our engineers are working on it, We will be back soon!!";
     $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");

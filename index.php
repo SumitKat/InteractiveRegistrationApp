@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['csrf'] = hash('sha256', time());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +118,7 @@ session_start();
                 <div class = "row"><label style="color: #000"><h4><strong>Add Details</strong> </h4></label><br>
                     <div class = "col-lg-12 col-md-12   col-sm-12 form">
                         <div class = "form-group bg-6">
+                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']; ?>">
                             <input class="form-control" type="text" name="street" placeholder="Street Address" id="street" autofocus>
                             <img class= "tickStreet" src="img/tick.png" style="height : 20px">
                             <img class= "crossStreet" src="img/cross.png" style="height : 20px"><p></p>

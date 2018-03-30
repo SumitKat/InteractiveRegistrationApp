@@ -3,6 +3,7 @@ session_start();
 if (!empty($_SESSION['login'])) {
     header("Location: ../model/dashboard.php");
 }
+$_SESSION['csrf'] = hash('sha256', time());
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +60,7 @@ if (!empty($_SESSION['login'])) {
                                  <p></p>
                                 <input type = "submit" name = "login" class="btn btn-primary btn-block" value = "SIGN IN">
                                 <p></p>
+                                <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']; ?>">
                                 <a href ="../view/forgot_pass.php">Forgotten my password</a>
                                 <br>
                                 <span class="error"><?php echo isset($emailErr) ? $emailErr : '';?></span>

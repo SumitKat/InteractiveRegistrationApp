@@ -321,11 +321,13 @@ $mail->Body = "
 
 //logging if mail is not sent
 if (!$mail->send()) {
-    echo "We are facing some problem. Our engineers are working on it, We will be back soon!!";
+    $_SESSION['fMessage'] = "We are facing some problem. Our engineers are working on it, We will be back soon!!";
     $myfile = fopen("../logs/error_log.txt", "a+") or die("Unable to open file!");
     $txt = "error in sending mail after registartion". $mail->ErrorInfo;
     fwrite($myfile, $txt);
     fclose($myfile);
 } else {
-    echo 'Message has been sent. Please check your mail';
+    $_SESSION['sMessage'] = "Your Account has been created!! Please Check your email and verify your email address.";
+    echo "succes";
+    header("Location: ../view/success.php");
 }

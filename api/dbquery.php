@@ -22,7 +22,9 @@ class DbQuery
     {
         $field=$values="";
         $counter = count($inputs);
-        foreach ($inputs as $key => $value) {
+        foreach ($inputs as $input_key => $input_value) {
+            $key = mysqli_real_escape_string($this->conn, $input_key);
+            $value = mysqli_real_escape_string($this->conn, $input_value);
             $counter--;
 
             if (!$counter) {
@@ -35,7 +37,6 @@ class DbQuery
             }
 
         }
-        var_dump($field);
         $this->sql = "INSERT INTO"." $table"." (".$field.") "." VALUES "." (".$values.")";
     }
 
@@ -55,11 +56,15 @@ class DbQuery
         $value = "";
 
         for ($i = 0; $i < count($array)-1; $i++) {
+            $array[$i] = mysqli_real_escape_string($this->conn, $array[$i]);
             $value .= $array[$i].", ";
         }
 
+        $array[count($array) - 1] = mysqli_real_escape_string($this->conn, $array[count($array) -1]);
         $value .= $array[count($array) -1];
         if ($id1 != '') {
+            $id1 = mysqli_real_escape_string($this->conn, $id1);
+            $id2 = mysqli_real_escape_string($this->conn, $id2);
             $this->sql = "SELECT $value FROM $table where $id1 = '$id2'";
             $result = $this->conn->query($this->sql);
             return $result->fetch_assoc();
@@ -83,7 +88,7 @@ class DbQuery
 
     public function join($id)
     {
-        $this->sql = "SELECT interest FROM user JOIN user_interest ON user_id = id JOIN interest ON interest.id = interest_id  WHERE user.id = $id";
+        $this->sql = "SELECT interest.interest FROM user JOIN user_interest ON user_interest.user_id = user.id JOIN interest ON interest.id = user_interest.interest_id  WHERE user.id = $id";
         $result = $this->conn->query($this->sql);
         $value = array();
         while ($row = $result->fetch_assoc()) {
@@ -98,12 +103,13 @@ class DbQuery
         $field = "";
         $counter = count($inputs);
 
-        foreach ($inputs as $key => $value) {
+        foreach ($inputs as $input_key => $input_value) {
+            $key = mysqli_real_escape_string($this->conn, $input_key);
+            $value = mysqli_real_escape_string($this->conn, $input_value);
             $counter--;
 
             if (!$counter) {
                 $field .= $key."='".$value."'";
-
             } else {
                 $field .= $key."='".$value."',";
             }

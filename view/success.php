@@ -1,6 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['sMessage'])) {
+    header("Location: ../view/login.php");
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +15,6 @@ session_start();
     <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src = "../js/forgot_pass.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
     <body>
@@ -39,27 +42,19 @@ session_start();
             </div>
         </nav>
 
-        <form class = "center-block" name = "loginForm" action = "<?php echo htmlspecialchars("../controller/forgot_pass.php");?>" method = "POST">
             <div class = "container-fluid text-center bg-1 ">
                 <div class = "card col-lg-3  col-lg-offset-0 col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">
                     <div class = "row">
                         <div class = "col-lg-12 col-md-12   col-sm-12 form">
                             <div class = "form-group bg-2">
-                                <br>
-                                <label> Forgot Password!!</label><br>
-                                <p><i>Let's get yoy a new one!!</i></p>
-                                <input class = "form-control" placeholder="Email" type = "email" name="forgotEmail" id = "forgotEmail" autofocus>
-                                <p></p>
-                               <span class="error" id ="ema"><?php echo isset($passErr) ? $passErr : '';?></span>
-                                <input type = "submit" name = "login" class="btn btn-primary btn-block" value = "Submit" id ="next">
-                                <p></p>
+                            	<span><h3><?php echo isset($_SESSION['sMessage']) ? 'Success!!' : '';?></h3></span>
+                                <span class="success"><?php echo isset($_SESSION['sMessage']) ? $_SESSION['sMessage'] : '';?></span>
+                                <span><?php unset($_SESSION['sMessage']);?></span>
                                 </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-
         <footer class = "text-nowrap navbar-fixed-bottom"> Copyright &copy; MindfireSolutions.com</footer>
     </body>
 

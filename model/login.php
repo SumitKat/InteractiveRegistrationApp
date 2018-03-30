@@ -1,7 +1,6 @@
 <?php
 ini_set('display_erros', 1);
 session_start();
-
 $email = $pass = "";
 require_once('../config/config.php');
 
@@ -12,6 +11,7 @@ if (!empty($_SESSION['login'])) {
     $emailErr = $passErr = "";
     $flag = false;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
         if (empty($_POST["loginEmail"])) {
             $emailErr = "Email can't be empty";
             $flag = true;
@@ -22,7 +22,6 @@ if (!empty($_SESSION['login'])) {
                 $flag = true;
             }
         }
-
         if (empty($_POST["loginPassword"])) {
             $passErr="Password can't be empty";
             $flag = true;
@@ -57,6 +56,8 @@ if (!empty($_SESSION['login'])) {
         if ($email=="") {
             $passErr = "";
         }
+    } else if ($_POST['csrf'] != $_SESSION['csrf']) {
+        $passErr = "You need to enter your credentials again";
     } else {
             $_SESSION['login']['id'] = $row['id'];
             header("Location: ../model/dashboard.php");
