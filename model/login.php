@@ -6,7 +6,7 @@ require_once('../config/config.php');
 
 // check if a user is already logged in
 if (!empty($_SESSION['login'])) {
-    header("Location: dashboard.php");
+    header("Location: ../view/dashboard.php");
 } else {
     $emailErr = $passErr = "";
     $flag = false;
@@ -52,7 +52,7 @@ if (!empty($_SESSION['login'])) {
             $passErr = "";
         }
     } else if ($row['valid'] == 'F') {
-        $passErr = "Please verify your email first!!";
+        $passErr = "Please check your email!!";
         if ($email=="") {
             $passErr = "";
         }
@@ -60,7 +60,7 @@ if (!empty($_SESSION['login'])) {
         $passErr = "You need to enter your credentials again";
     } else {
             $_SESSION['login']['id'] = $row['id'];
-            header("Location: ../model/dashboard.php");
+            header("Location: ../view/dashboard.php");
     }
 }
 

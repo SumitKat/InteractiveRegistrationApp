@@ -1,6 +1,12 @@
 <?php
 session_start();
 $_SESSION['csrf'] = hash('sha256', time());
+
+// check if a user is already logged in
+if (!empty($_SESSION['login'])) {
+    header("Location: ../view/dashboard.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,13 +43,13 @@ $_SESSION['csrf'] = hash('sha256', time());
                     <li><a href = "#">About Us</a></li>
                 </ul>
                 <ul class = "nav navbar-nav navbar-right">
-                    <li><a href = "model/login.php"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+                    <li><a href = "view/login.php"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- form for email and password input -->
-    <form class="center-block form1" name="loginForm" method="POST" action="api/database.php">
+    <form class = "center-block form1" id = "loginForm" method = "POST" action = "api/register_user.php">
         <div class="container-fluid container1">
         <div class = "container-fluid text-center bg-1 ">
             <div class = "card col-lg-3  col-lg-offset-0 col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">

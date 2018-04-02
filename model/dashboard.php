@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (empty($_SESSION['login'])) {
-    header("Location: login.php");
-}
+
 
 require_once('../config/config.php');
 require_once('../api/dbquery.php');
-
+if (empty($_SESSION['login'])) {
+    header("Location: login.php");
+}
 $conn = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DATABASE_NAME);
 
 // Check connection
@@ -61,7 +61,3 @@ $street = $rowAddress['street'];
 $state = $rowAddress['state'];
 $country = $rowAddress['country'];
 
-//extracting user info to fill in the table
-
-
-require_once('../view/dashboard.php');

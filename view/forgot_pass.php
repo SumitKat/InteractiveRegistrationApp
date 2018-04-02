@@ -1,11 +1,15 @@
 <?php
 session_start();
+// check if a user is already logged in
+if (!empty($_SESSION['login'])) {
+    header("Location: ../view/dashboard.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Forgot Password</title>
     <meta charset = "utf-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1">
     <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -39,7 +43,7 @@ session_start();
             </div>
         </nav>
 
-        <form class = "center-block" name = "loginForm" action = "<?php echo htmlspecialchars("../controller/forgot_pass.php");?>" method = "POST">
+        <form class = "center-block" id = "forgotForm" action = "<?php echo htmlspecialchars("../controller/forgot_pass.php");?>" method = "POST">
             <div class = "container-fluid text-center bg-1 ">
                 <div class = "card col-lg-3  col-lg-offset-0 col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">
                     <div class = "row">

@@ -14,7 +14,7 @@ if ($_SESSION['csrf'] == $_POST['csrf']) {
     empty(!$_POST['phone']) ? $user['phone'] = $_POST['phone'] : '';
     empty(!$user) ? $sql->update('user', $user, 'id', $result['id']) : '';
 
-    $sql2 =new DbQuery();
+    $sql2 = new DbQuery();
     $address = [];
     empty(!$_POST['street']) ? $address['street'] = $_POST['street'] : '';
     empty(!$_POST['state']) ? $address['state'] = $_POST['state'] : '';
@@ -22,7 +22,8 @@ if ($_SESSION['csrf'] == $_POST['csrf']) {
     empty(!$_POST['country']) ? $address['country'] = $_POST['country'] : '';
     empty(!$address) ? $sql2->update('address', $address, 'user_id', $result['id']) : '';
     
-    header("Location: ../model/dashboard.php");
+    $sql3 = new DbQuery();
+    header("Location: ../view/dashboard.php");
 } else {
     header("Location:../model/logout.php");
 }

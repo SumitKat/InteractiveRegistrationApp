@@ -1,7 +1,6 @@
 <?php 
 require_once '../config/ini_config.php';
 require_once '../api/dbquery.php';
-require_once '../view/other_user.php';
 session_start();
 $tables =new DbQuery();
 $table = [];

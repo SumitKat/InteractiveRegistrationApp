@@ -1,7 +1,8 @@
 <?php
 session_start();
+require_once('../model/dashboard.php');
 if (empty($_SESSION['login'])) {
-    header("Location: ../model/login.php");
+    header("Location: ../view/login.php");
 }
 ?>
 
@@ -35,12 +36,8 @@ if (empty($_SESSION['login'])) {
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Our Products</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="../model/other_user.php">Other Users</a></li>
-                        <li><a href="../view/update_profile.php">Update Profile</a></li>
+                        <li class="active"><a href="../view/other_user.php">Other Users</a></li>
+                        <li><a href="../view/update_profile.php">Edit Profile</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../model/logout.php"><span class="glyphicon glyphicon-off"></span> Log Out</a></li>
@@ -52,7 +49,7 @@ if (empty($_SESSION['login'])) {
         <!-- Main Container  -->
         <div class="container-fluid bg-1 text-center">
             <h3 class="margin">Hi, <?php echo $name?></h3>
-            <img src="../img/loginbcg.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+            <img src="../img/user.png"  style="width: 200px" alt="user" >
             <h3> <?php echo $phone." / ".$email ?></h3>
         </div>
 

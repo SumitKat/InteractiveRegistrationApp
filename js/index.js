@@ -1,8 +1,7 @@
 $(document).ready(function() {
     var errorEmail = [];
     var errorName = [];
-
-    $("#form3_next").attr("disabled", true);
+    var submitForm = [];
 
     // check if email field is changed
     $("#loginEmail").change(function(){  
@@ -84,7 +83,9 @@ $(document).ready(function() {
         if(flag ==0 && errorEmail.length == 3) {
             $(".container1").hide();
             $(".container2").show();
+            submitForm[0] = 1
         } else {
+            submitForm[0] = 0;
             $("#ema").text("Please Fill all the above fields correctly");
         }
     });
@@ -151,8 +152,10 @@ $(document).ready(function() {
             if(flag == 0 && errorName.length == 4) {
                 $(".container2").hide();
                 $(".container3").show();
+                submitForm[1] = 1;
             } else {
                 $("#form2_err").text("Please Fill all the above fields correctly");
+                submitForm[1] = 0;
             }
         }
     });
@@ -204,8 +207,9 @@ $(document).ready(function() {
         if(isEmpty($("#country").val())) {
             $("#form3_err").text("Country field is required");
             showCross($(".crossCountry"),$(".tickCountry"));
+            submitForm[2] = 0;
         } else {
-            $("#form3_next").attr("disabled", false);
+            submitForm[2] = 1;
             showTick($(".crossCountry"),$(".tickCountry"));
         }
 
@@ -216,6 +220,12 @@ $(document).ready(function() {
         $(".container2").show();
     });
 
+     $("#loginForm").submit(function(e){
+            if(submitForm[0] == 0 || submitForm[1] == 0 || submitForm[2] == 0 || submitForm.length != 3) {
+                e.preventDefault();
+                $("#form3_err").text("Please fill all the above required fields");
+            }
+     });
 
     // function to check if the field is empty
     function isEmpty(arg) {

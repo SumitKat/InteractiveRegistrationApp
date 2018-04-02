@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var errorEmail = [];
-    $("#next").attr("disabled", true);
+    var flag = false;
 
     // check if email field is changed
     $("#forgotEmail").change(function(){  
@@ -33,7 +33,6 @@ $(document).ready(function() {
                     errorEmail[0] = 0;
                 } else {
                     errorEmail[0] = 1;
-                    $("#next").attr("disabled", false);
                     resp ="";
                 }
                 
@@ -43,5 +42,12 @@ $(document).ready(function() {
         }
 
 	});
+
+        $("#forgotForm").submit(function(e){
+            if(errorEmail[0] == 0 || errorEmail.length == 0) {
+                e.preventDefault();
+                $("#ema").text("Please fill the email correctly");
+            }
+     });
 
 });

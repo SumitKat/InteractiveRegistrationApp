@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION['login'])) {
-    header("Location: ../model/dashboard.php");
+    header("Location: ../view/dashboard.php");
 }
 $_SESSION['csrf'] = hash('sha256', time());
 ?>
